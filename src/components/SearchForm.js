@@ -32,7 +32,7 @@ export const SearchForm = ({ handleOnSubmit }) => {
 
           <Col>
             <Button type="submit" className="px-5" variant="info">
-              List
+              Search
             </Button>
           </Col>
         </Row>

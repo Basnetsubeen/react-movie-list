@@ -4,9 +4,11 @@ import { Button } from "react-bootstrap";
 import { CustomCard } from "./CustomCard";
 import { useState } from "react";
 import { useEffect } from "react";
+import { CustomList } from "./CustomList";
 
 export const MovieList = ({ movieList, deleteMovie }) => {
   const [displayList, setDisplayList] = useState(movieList);
+  const [view, setView] = useState("grid");
 
   // if we use the usestate to store the variable and if it doesn't gets updatd
   // then we use useEffect to update that value and movielist is a dependencies that helps to update/rerender a
@@ -40,8 +42,12 @@ export const MovieList = ({ movieList, deleteMovie }) => {
             </Button>
           </ButtonGroup>
           <ButtonGroup aria-label="Basic-example">
-            <Button variant="secondary">Grid</Button>
-            <Button variant="success">List</Button>
+            <Button variant="secondary" onClick={() => setView("grid")}>
+              Grid
+            </Button>
+            <Button variant="success" onClick={() => setView("list")}>
+              List
+            </Button>
           </ButtonGroup>
         </Col>
       </Row>
@@ -50,9 +56,13 @@ export const MovieList = ({ movieList, deleteMovie }) => {
 
       <Row className="mt-5">
         <Col className="d-flex justify-content-between flex-wrap">
-          {displayList.map((item, i) => (
-            <CustomCard key={i} movie={item} deleteMovie={deleteMovie} />
-          ))}
+          {displayList.map((item, i) =>
+            view === "grid" ? (
+              <CustomCard key={i} movie={item} deleteMovie={deleteMovie} />
+            ) : (
+              <CustomList key={i} movie={item} deleteMovie={deleteMovie} />
+            )
+          )}
         </Col>
       </Row>
     </div>
